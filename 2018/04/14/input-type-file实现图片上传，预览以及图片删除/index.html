@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="input,file,文件上传," />
 
 
 
@@ -94,17 +94,20 @@
 
 
 
-<meta name="description" content="开发记录总结个人日常工作学习用到的一些东西">
-<meta name="keywords" content="前端">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fozero">
-<meta property="og:url" content="http://blog.diankr.cn/index.html">
+<meta name="description" content="###背景前两天在做一个PC网站的意见反馈，其中涉及到了图片上传功能，要求可以上传多张图片，并且支持图片上传预览及图片删除，图片上传这一块以前没怎么搞过，而且一般也很少会碰到这样的需求，所以在做这个功能的时候，参考了很多网上的代码 ，现在就单独写一篇博客来记录下实现的整个过程，以及在做的过程中遇到的一些坑。 先来看下实现的最后效果： 首先先创建好一个用于展示预览图片及上传按钮的div，conten">
+<meta name="keywords" content="input,file,文件上传">
+<meta property="og:type" content="article">
+<meta property="og:title" content="input type=file实现图片上传，预览以及图片删除">
+<meta property="og:url" content="http://blog.diankr.cn/2018/04/14/input-type-file实现图片上传，预览以及图片删除/index.html">
 <meta property="og:site_name" content="fozero">
-<meta property="og:description" content="开发记录总结个人日常工作学习用到的一些东西">
+<meta property="og:description" content="###背景前两天在做一个PC网站的意见反馈，其中涉及到了图片上传功能，要求可以上传多张图片，并且支持图片上传预览及图片删除，图片上传这一块以前没怎么搞过，而且一般也很少会碰到这样的需求，所以在做这个功能的时候，参考了很多网上的代码 ，现在就单独写一篇博客来记录下实现的整个过程，以及在做的过程中遇到的一些坑。 先来看下实现的最后效果： 首先先创建好一个用于展示预览图片及上传按钮的div，conten">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images2018.cnblogs.com/blog/871647/201804/871647-20180414211723527-482463689.gif">
+<meta property="og:updated_time" content="2018-04-14T15:48:58.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fozero">
-<meta name="twitter:description" content="开发记录总结个人日常工作学习用到的一些东西">
+<meta name="twitter:title" content="input type=file实现图片上传，预览以及图片删除">
+<meta name="twitter:description" content="###背景前两天在做一个PC网站的意见反馈，其中涉及到了图片上传功能，要求可以上传多张图片，并且支持图片上传预览及图片删除，图片上传这一块以前没怎么搞过，而且一般也很少会碰到这样的需求，所以在做这个功能的时候，参考了很多网上的代码 ，现在就单独写一篇博客来记录下实现的整个过程，以及在做的过程中遇到的一些坑。 先来看下实现的最后效果： 首先先创建好一个用于展示预览图片及上传按钮的div，conten">
+<meta name="twitter:image" content="https://images2018.cnblogs.com/blog/871647/201804/871647-20180414211723527-482463689.gif">
 
 
 
@@ -133,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.diankr.cn/"/>
+  <link rel="canonical" href="http://blog.diankr.cn/2018/04/14/input-type-file实现图片上传，预览以及图片删除/"/>
 
 
 
 
 
-  <title>fozero</title>
+  <title>input type=file实现图片上传，预览以及图片删除 | fozero</title>
   
 
 
@@ -164,9 +167,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -279,9 +280,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -311,9 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/14/input-type-file实现图片上传，预览以及图片删除/" itemprop="url">input type=file实现图片上传，预览以及图片删除</a></h1>
+          <h1 class="post-title" itemprop="name headline">input type=file实现图片上传，预览以及图片删除</h1>
         
 
         <div class="post-meta">
@@ -385,9 +384,7 @@
       
 
       
-        
-          
-            <p>###背景<br>前两天在做一个PC网站的意见反馈，其中涉及到了图片上传功能，要求可以上传多张图片，并且支持图片上传预览及图片删除，<br>图片上传这一块以前没怎么搞过，而且一般也很少会碰到这样的需求，所以在做这个功能的时候，参考了很多网上的代码 ，<br>现在就单独写一篇博客来记录下实现的整个过程，以及在做的过程中遇到的一些坑。</p>
+        <p>###背景<br>前两天在做一个PC网站的意见反馈，其中涉及到了图片上传功能，要求可以上传多张图片，并且支持图片上传预览及图片删除，<br>图片上传这一块以前没怎么搞过，而且一般也很少会碰到这样的需求，所以在做这个功能的时候，参考了很多网上的代码 ，<br>现在就单独写一篇博客来记录下实现的整个过程，以及在做的过程中遇到的一些坑。</p>
 <p>先来看下实现的最后效果：<br><img src="https://images2018.cnblogs.com/blog/871647/201804/871647-20180414211723527-482463689.gif" alt=""></p>
 <p>首先先创建好一个用于展示预览图片及上传按钮的div，content-img-list用于动态展示预览图片，file用于显示上传按钮<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">"content-img"</span>&gt;</span><br><span class="line">        	&lt;<span class="selector-tag">ul</span> class=<span class="string">"content-img-list"</span>&gt;</span><br><span class="line">        		&lt;!-- &lt;<span class="selector-tag">li</span> class=<span class="string">"content-img-list-item"</span>&gt;&lt;<span class="selector-tag">img</span> src=<span class="string">"https://www.baidu.com/img/bd_logo1.png"</span> alt=<span class="string">""</span>&gt;&lt;<span class="selector-tag">a</span> class=<span class="string">"delete-btn"</span>&gt;&lt;<span class="selector-tag">i</span> class=<span class="string">"ico-delete"</span>&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt; --&gt;</span><br><span class="line">        	&lt;/ul&gt;</span><br><span class="line">        	&lt;<span class="selector-tag">div</span> class=<span class="string">"file"</span>&gt;</span><br><span class="line">        		&lt;<span class="selector-tag">i</span> class=<span class="string">"ico-plus"</span>&gt;&lt;/i&gt;上传图片，支持jpg/png&lt;<span class="selector-tag">input</span> type=<span class="string">"file"</span> name=<span class="string">"file"</span> accept=<span class="string">"image/*"</span> id=<span class="string">"upload"</span> &gt;</span><br><span class="line">        	&lt;/div&gt;	</span><br><span class="line">        &lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
 <p>###上传按钮美化<br>默认input type=file的上传按钮非常的丑陋，实现自定义上传按钮样式，这里主要通过设置input的透明度将它设置为opacity: 0;</p>
@@ -417,8 +414,6 @@
 <p>作者：fozero<br>声明：原创文章，转载请注明出处，谢谢！<a href="http://www.cnblogs.com/fozero/p/8835628.html" target="_blank" rel="noopener">http://www.cnblogs.com/fozero/p/8835628.html</a><br>标签：input,file,图片上传</p>
 </blockquote>
 
-          
-        
       
     </div>
     
@@ -433,300 +428,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.diankr.cn/2018/03/26/在使用Git提交代码的时候犯了个低级错误/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fozero">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://sfault-avatar.b0.upaiyun.com/391/215/3912151561-5ab7f3719fb7c_huge256">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="fozero">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/26/在使用Git提交代码的时候犯了个低级错误/" itemprop="url">在使用Git提交代码的时候犯了个低级错误</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T02:45:01+08:00">
-                2018-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/input-file-文件上传/" rel="tag"># input,file,文件上传</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天在使用git提交代码的时候，犯了个很低级的错误，按照一切流程当我add并commit提交代码，最后使用push到远程仓库，</p>
-<p>接下来奇怪的事情发生了，push之后，查看远程仓库代码并没有发现提交记录，emmmm~  </p>
-<p>此时我内心是不淡定的，什么他妈的鬼？我提交的代码去哪里了 ？</p>
-<p>正好此时，赶上运维升级服务器，以为是服务器的问题，等服务器升级完再试一试。</p>
-<p>MD，服务器升级完了，再次push在远程仓库仍然无法看到提交记录，在本地使用git -log查看提交记录，</p>
-<p>草，这不是有提交记录吗，真是见了鬼了哦！</p>
-<p><img src="https://images2018.cnblogs.com/blog/871647/201803/871647-20180329230628539-1173376986.png" alt=""></p>
-<p>没办法，叫同事过来帮看一下，再次push仍然提示没有需要push的内容，那既然这样，我把本地的代码随便</p>
-<p>修改个地方，提交并push上去看看可不可以，发现问题了，卧槽。原来是在push代码的时候rejected被拒绝了，emmmm…</p>
-<p><img src="https://images2018.cnblogs.com/blog/871647/201803/871647-20180329230105397-1900330801.png" alt=""></p>
-<p>上面的提示已经很明显了，大致意思是说当前分支落后于远程分支，在push代码之前先pull一下  ， 但是我想想~</p>
-<p>我记得，在我push之前我一般都pull过了啊 ， 然后问了下同事才知道，原来在git pull默认是不知道你要pull哪个远程分支，</p>
-<p>所以像这样git pull origin data_center_update  后面指定pull的远程分支，问题解决 。</p>
-<p>最后，总结一下</p>
-<p>真的是犯了个很低级的错误，其实没有必要单独写个博客，但我觉得，以后这样的问题不能再出现了，所以想给自己提个醒，</p>
-<p>在博客中记录下来，以后出现这样的问题，要细心细心再细心。</p>
-<blockquote>
-<p>作者：fozero<br>声明：原创文章，转载请注明出处，谢谢！<a href="http://www.cnblogs.com/fozero/p/8673298.html" target="_blank" rel="noopener">http://www.cnblogs.com/fozero/p/8673298.html</a><br>标签：总结，git</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.diankr.cn/2018/03/26/使用hexo和github搭建个人博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fozero">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://sfault-avatar.b0.upaiyun.com/391/215/3912151561-5ab7f3719fb7c_huge256">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="fozero">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/26/使用hexo和github搭建个人博客/" itemprop="url">使用hexo和github搭建个人博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T02:40:41+08:00">
-                2018-03-26
-              </time>
+              <a href="/2018/03/26/在使用Git提交代码的时候犯了个低级错误/" rel="next" title="在使用Git提交代码的时候犯了个低级错误">
+                <i class="fa fa-chevron-left"></i> 在使用Git提交代码的时候犯了个低级错误
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>##配置git ssh</p>
-<p>###生成SSH密钥<br>查看是否已经有了ssh密钥：cd ~/.ssh<br>如果没有密钥则不会有此文件夹，有则备份删除<br>生成密钥：<br>ssh-keygen -t rsa -C “<a href="mailto:fozero@126.com" target="_blank" rel="noopener">fozero@126.com</a>“<br>按3个回车，密码为空。<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Enter <span class="built_in">file</span> <span class="keyword">in</span> which <span class="built_in">to</span> save <span class="keyword">the</span> key (/c/Users/SKY/.ssh/id_rsa):</span><br><span class="line">Enter passphrase (<span class="literal">empty</span> <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br></pre></td></tr></table></figure></p>
-<p>………………<br>最后得到了两个文件：id_rsa和id_rsa.pub  （我这里是生成在这个目位置/c/Users/SKY/.ssh/id_rsa）<br>参考<a href="https://segmentfault.com/q/1010000003061640" target="_blank" rel="noopener">https://segmentfault.com/q/1010000003061640</a></p>
-<p>###设置Git的user name和email<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name <span class="string">"fozero"</span></span><br><span class="line">git<span class="built_in"> config </span>--global user.email <span class="string">"fozero@126.com"</span></span><br></pre></td></tr></table></figure></p>
-<p>###测试连接是否成功<br>$ ssh -T <a href="mailto:git@GitHub.com" target="_blank" rel="noopener">git@GitHub.com</a><br>但是返回Hi fozero! You’ve successfully authenticated, but GitHub does not provide shell access.<br>在git clone使用ssh的方式</p>
-<p>解决在天津 ssh-add id_rsa时候报错Could not open a connection to your authentication agent.<br>先执行ssh-agent在 ssh-add<br>ssh-agent bash<br> ssh-add id_rsa<br>如果出现这个信息，说明加入成功 Identity added: id_rsa (id_rsa)</p>
-<p>###最后，github添加SSH keys<br>找到并打开id_rsa.pub文件（存放于C:\Users\SKY.ssh下），在github设置里面添加新的SSH keys，复制id_rsa.pub内容到github中即可</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -736,10 +467,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -747,6 +479,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -963,10 +699,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
